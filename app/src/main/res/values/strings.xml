@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Plant Monitor</string>
+    <string name="grow_button">Grow this</string>
+    <string name="action_settings">Settings</string>
+    <string name="temperature">%sC</string>
+    <string name="humidity">%s%%</string>
+    <string name="moisture">%s%%</string>
+    <string name="light">%s%%</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="season">%s - %s</string>
+    <string name="SeedDepthandSpace">Plant seeds %scm deep and %scm apart</string>
+    <string name="plantSpace">Transplant plants %scm apart</string>
+    <string name="rowSpace">Prepare rows %scm apart</string>
+    <string name="nutrients">%s-%s-%s</string>
+
+    <string-array name="time_categories">
+        <item>seconds</item>
+        <item>minutes</item>
+        <item>hours</item>
+        <item>days</item>
+
+    </string-array>
+    <string-array name="mim_minutes">
+        <item>minutes</item>
+        <item>hours</item>
+        <item>days</item>
+
+    </string-array>
+
+</resources>

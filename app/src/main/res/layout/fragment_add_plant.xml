@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPlantFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/formLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Add a Plant"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/primary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@id/tvForm"
+        android:gravity="center_vertical"
+        android:text="* Required"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_toRightOf="@id/tvForm"
+        android:text="Clear" />
+
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/btnClear"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:text="* Plant name:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnClear"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/tvName"
+        android:gravity="center"
+        android:hint="Onion"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvEarliestPlanting"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvName"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginStart="20dp"
+        android:paddingEnd="5dp"
+        android:text="* Earliest month to plant:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEarliestPlanting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_toRightOf="@id/tvEarliestPlanting"
+        android:gravity="center"
+        android:hint="February"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvLatestPlanting"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_below="@id/tvEarliestPlanting"
+        android:gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:paddingEnd="5dp"
+        android:text="* Latest month to plant:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etLatestPlanting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvLatestPlanting"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textPersonName"
+
+        android:layout_below="@id/tvEarliestPlanting"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:gravity="center"
+        android:hint="March"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDaysToSproutLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvLatestPlanting"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+
+        android:gravity="center_vertical"
+        android:text="Days to sprout:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etDaysToSprout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLatestPlanting"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/tvDaysToSproutLabel"
+        android:gravity="center"
+        android:hint="14"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvDaysToMatureLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvDaysToSproutLabel"
+        android:layout_marginStart="20dp"
+        android:text="Days to maturity:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etDaysToMature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:inputType="number"
+        android:layout_toRightOf="@id/tvDaysToMatureLabel"
+        android:layout_below="@id/tvDaysToSproutLabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:hint="40"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPHlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvDaysToMatureLabel"
+        android:layout_marginStart="20dp"
+        android:text="PH:"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etPH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_toRightOf="@id/tvPHlabel"
+        android:layout_below="@id/tvDaysToMatureLabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:hint="5"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSeedDepth"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvPHlabel"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginStart="20dp"
+        android:text="Seed depth (cm):"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etSeedDepth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_toRightOf="@id/tvSeedDepth"
+        android:layout_below="@id/tvPHlabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:hint="0.5"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSeedApart"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvSeedDepth"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Centimeters between seeds:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etSeedApart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_toRightOf="@id/tvSeedApart"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/tvSeedDepth"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:hint="3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTransplantSpacing"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+
+        android:layout_below="@id/tvSeedApart"
+        android:layout_marginStart="20dp"
+        android:text="Transplant spacing (cm):"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etTransplantSpacing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_toRightOf="@id/tvTransplantSpacing"
+        android:hint="50"
+        android:layout_below="@id/tvSeedApart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRowSpacingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+
+        android:layout_below="@id/tvTransplantSpacing"
+        android:layout_marginStart="20dp"
+        android:text="Centimeters between rows:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etRowSpacing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_toRightOf="@id/tvRowSpacingLabel"
+        android:layout_below="@id/tvTransplantSpacing"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:hint="50"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPlantMoistureLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvRowSpacingLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:text="* Minimum soil moisture:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etPlantMoisture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRowSpacingLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/tvPlantMoistureLabel"
+        android:hint="40"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvPlantLightHoursLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvPlantMoistureLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+
+        android:text="Hours of light per day: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/etPlantLightHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPlantMoistureLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:inputType="number"
+
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginLeft="1dp"
+        android:layout_toRightOf="@id/tvPlantLightHoursLabel"
+        android:hint="8"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAirTempLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvPlantLightHoursLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="* Maximum air temperature: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etAirTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPlantLightHoursLabel"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="88dp"
+        android:layout_toRightOf="@id/tvAirTempLabel"
+        android:hint="20"
+
+        android:inputType="numberDecimal"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvSoilTempLabel"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvAirTempLabel"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:text="Ideal soil temperature: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etSoilTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvAirTempLabel"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="88dp"
+        android:layout_toRightOf="@id/tvSoilTempLabel"
+        android:inputType="numberDecimal"
+        android:gravity="center_vertical"
+        android:hint="25"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHumidityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/tvSoilTempLabel"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:text="Ideal Humidity: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etPlantHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSoilTempLabel"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="88dp"
+        android:layout_toRightOf="@id/tvHumidityLabel"
+        android:hint="80"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvNitrogenLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvHumidityLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="Ideal Nitrogen Fertiliser: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etNitrogen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvNitrogenLabel"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/tvHumidityLabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginEnd="88dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPhosphorousLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvNitrogenLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="Ideal Phosphorous Fertiliser: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etPhosphorous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvPhosphorousLabel"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_below="@id/tvNitrogenLabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginEnd="88dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvPotassiumLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvPhosphorousLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:text="Ideal Potassium Fertiliser: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etPotassium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvPotassiumLabel"
+        android:layout_marginTop="5dp"
+        android:inputType="numberDecimal"
+
+        android:layout_below="@id/tvPhosphorousLabel"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginEnd="88dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvCompanionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvPotassiumLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+
+        android:gravity="center_vertical"
+        android:text="What does the plant grow well with? "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etCompanions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCompanionLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:hint="potatoes,carrots,broccoli"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRivalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/etCompanions"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+
+        android:gravity="center_vertical"
+        android:text="What does this plant grow poorly with? "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etRival"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRivalLabel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:hint="cabbage,lettuce"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etRival"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:text="Add" />
+
+
+</RelativeLayout>
+    </ScrollView>
+</FrameLayout>

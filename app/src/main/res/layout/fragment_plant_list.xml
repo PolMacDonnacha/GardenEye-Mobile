@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plantListRecycler"
+        android:name="com.example.plantmonitor.PlantFragment"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/etPlantName"
+        android:layout_marginTop="21dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:context=".PlantFragment"
+        tools:listitem="@layout/fragment_plant" />
+
+    <EditText
+        android:id="@+id/etPlantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Search Plant Name"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/etPlantName"
+        android:text="Search" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnNewPlant"
+        android:layout_width="102dp"
+        android:layout_height="97dp"
+        android:layout_below="@id/plantListRecycler"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="45dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="Add"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/primary" />
+</RelativeLayout>
