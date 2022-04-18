@@ -70,6 +70,76 @@ class SettingsFragment : Fragment() {
 
     override fun onResume() {
         Log.i("RESUMING", "Resuming Settings Fragment")
+
+
+        switchAutoPump?.setOnClickListener {
+            if (switchAutoPump!!.isChecked) {
+                controls!!.autoPump = 1
+                controls!!.pumpSwitch = 0
+            } else {
+                controls!!.autoPump = 0
+            }
+            updateDatabase()
+        }
+        switchAutoFan?.setOnClickListener {
+            Log.i("AUTO_FAN", "Auto fan switch clicked")
+            if (switchAutoFan!!.isChecked) {
+                controls!!.autoCool = 1
+                controls!!.fanSwitch = 0
+            } else {
+                controls!!.autoCool = 0
+            }
+            updateDatabase()
+        }
+        switchAutoTimelapse?.setOnClickListener {
+            if (switchAutoTimelapse!!.isChecked) {
+                controls!!.autoTimelapse = 1
+                controls!!.timelapseSwitch = 0
+                //timelapseToggle!!.isClickable = false
+            } else {
+                controls!!.autoTimelapse = 0
+                //timelapseToggle!!.isClickable = true
+            }
+            updateDatabase()
+        }
+
+
+        //If any of the timelapse parameters are changed, calculate the video length
+        etTimelapseInterval?.setOnFocusChangeListener{ _, _ ->
+            Log.d("etTimelapseInterval","Focus changed")
+            checkTimelapseParams()
+        }
+        etTimelapseLength?.setOnFocusChangeListener{ _, _ ->
+            Log.d("etTimelapseLength","Focus changed")
+            checkTimelapseParams()
+        }
+        etFPS?.setOnFocusChangeListener{ _, _ ->
+            Log.d("etFPS","Focus changed")
+            checkTimelapseParams()
+        }
+        SpinnerLength?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("SpinnerLength","Item selected")
+                checkTimelapseParams()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(activity, "A time category must be selected", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        SpinnerInterval?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("SpinnerInterval","Item selected")
+                checkTimelapseParams()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(activity, "A time category must be selected", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+
         // Read from the database controls when they change
         controlRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -116,14 +186,14 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val time_categories = ArrayAdapter.createFromResource(
+        val timeCategories = ArrayAdapter.createFromResource(
             activity as Context,
             R.array.time_categories,
             android.R.layout.simple_spinner_item
         )
 
         // Apply the adapter to the spinner
-        SpinnerInterval?.adapter = time_categories
+        SpinnerInterval?.adapter = timeCategories
         val mim_minutes = ArrayAdapter.createFromResource(
             activity as Context,
             R.array.mim_minutes,
@@ -139,36 +209,7 @@ class SettingsFragment : Fragment() {
         SpinnerFan?.adapter = seconds_and_minutes
         SpinnerPump?.adapter = seconds_and_minutes
 
-        switchAutoPump?.setOnClickListener {
-            if (switchAutoPump!!.isChecked) {
-                controls!!.autoPump = 1
-                controls!!.pumpSwitch = 0
-            } else {
-                controls!!.autoPump = 0
-            }
-            updateDatabase()
-        }
-        switchAutoFan?.setOnClickListener {
-            Log.i("AUTO_FAN", "Auto fan switch clicked")
-            if (switchAutoFan!!.isChecked) {
-                controls!!.autoCool = 1
-                controls!!.fanSwitch = 0
-            } else {
-                controls!!.autoCool = 0
-            }
-            updateDatabase()
-        }
-        switchAutoTimelapse?.setOnClickListener {
-            if (switchAutoTimelapse!!.isChecked) {
-                controls!!.autoTimelapse = 1
-                controls!!.timelapseSwitch = 0
-                //timelapseToggle!!.isClickable = false
-            } else {
-                controls!!.autoTimelapse = 0
-                //timelapseToggle!!.isClickable = true
-            }
-            updateDatabase()
-        }
+
 
         buttonUpdate?.setOnClickListener {
             //If the page is still open
@@ -222,6 +263,31 @@ class SettingsFragment : Fragment() {
 
 
     }
+    fun checkTimelapseParams(){
+        if (etTimelapseLength != null && etTimelapseLength.text.toString().isNotEmpty() && etTimelapseLength.text.toString().toInt() > 0){
+            var numberOfPictures = 0
+            var videoSeconds = 0
+            var intervalSeconds = 0
+            var lengthMinutes = 0
+            if (etTimelapseInterval.text.toString().isNotEmpty() && etTimelapseInterval.text.toString().toInt() > 0){
+                if (etFPS.text.toString().isNotEmpty() && etFPS.text.toString().toInt() > 0) {
+                    timelapseIntervalTimeCat = SpinnerInterval?.selectedItem.toString()
+                    Log.d("SpinnerInterval",SpinnerInterval?.selectedItem.toString())
+                    Log.d("SpinnerLength",SpinnerLength?.selectedItem.toString())
+                    timelapseLengthTimeCat = SpinnerLength?.selectedItem.toString()
+                    lengthMinutes = minutesConversion(etTimelapseLength.text.toString().toInt(),timelapseLengthTimeCat!!)
+                    intervalSeconds = secondsConversion(etTimelapseInterval.text.toString().toInt(),timelapseIntervalTimeCat!!)
+                    numberOfPictures = (lengthMinutes * 60) / intervalSeconds
+                    if (tvNumOfPics != null){
+                        tvNumOfPics?.text = numberOfPictures.toString()
+                        videoSeconds = (numberOfPictures / etFPS.text.toString().toDouble()).roundToInt()
+                        tvVidLength.text = videoSeconds.toString()
+                    }
+                }
+            }
+
+        }
+    }
 
     fun autoControls(pump: Int, fan: Int, timelapse: Int) {
         switchAutoPump?.isChecked = pump == 1
@@ -236,23 +302,25 @@ class SettingsFragment : Fragment() {
         }.addOnFailureListener { Log.e("Data Update", "Failed to update data") }
     }
 
-    fun secondsConversion(inputSeconds: Int, timeCategory: String): Int {
+    private fun secondsConversion(inputSeconds: Int, timeCategory: String): Int {
+        var output = 0
+        Log.d("SecondsConversion","INPUT: $inputSeconds")
+        Log.d("SecondsConversion","TIME CATEGORY: $timeCategory")
         when (timeCategory) {
-            "seconds" -> {}
-            "minutes" -> inputSeconds.times(60f)
-            "hours" -> inputSeconds.times(60 * 60f)
-            "days" -> inputSeconds.times(60 * 60 * 60f)
+            "seconds" -> {output = inputSeconds}
+            "minutes" -> output = inputSeconds.times(60)
+            "hours" -> output = inputSeconds.times(60 * 60)
+            "days" -> output = inputSeconds.times(60 * 60 * 60)
         }
-        return inputSeconds
+        Log.d("SecondsConversion","OUTPUT: $output")
+        return output
     }
 
-    fun minutesConversion(inputMinutes: Int, timeCategory: String): Int {
+    private fun minutesConversion(inputMinutes: Int, timeCategory: String): Int {
         var newTime = 0f
         when (timeCategory) {
             "seconds" -> newTime = inputMinutes.div(60f)
-            "minutes" -> {
-                newTime = inputMinutes.toFloat()
-            }
+            "minutes" -> { newTime = inputMinutes.toFloat() }
             "hours" -> newTime = inputMinutes.times(60 * 60f)
             "days" -> newTime = inputMinutes.times(60 * 60 * 60f)
         }
