@@ -161,6 +161,36 @@ class HomeFragment : Fragment() {
             }
             updateDatabase()
         }
+        switchAutoPump?.setOnClickListener {
+            if (switchAutoPump!!.isChecked) {
+                controls!!.autoPump = 1
+                controls!!.pumpSwitch = 0
+            } else {
+                controls!!.autoPump = 0
+            }
+            updateDatabase()
+        }
+        switchAutoFan?.setOnClickListener {
+            Log.i("AUTO_FAN","Auto fan switch clicked")
+            if (switchAutoFan!!.isChecked) {
+                controls!!.autoCool = 1
+                controls!!.fanSwitch = 0
+            } else {
+                controls!!.autoCool = 0
+            }
+            updateDatabase()
+        }
+        switchAutoTimelapse?.setOnClickListener {
+            if (switchAutoTimelapse!!.isChecked) {
+                controls!!.autoTimelapse = 1
+                controls!!.timelapseSwitch = 0
+                //timelapseToggle!!.isClickable = false
+            } else {
+                controls!!.autoTimelapse = 0
+                //timelapseToggle!!.isClickable = true
+            }
+            updateDatabase()
+        }
 
     }
 

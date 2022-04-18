@@ -32,11 +32,11 @@
 
         <TextView
             android:id="@+id/tvMoistureLabel"
-            android:layout_width="366dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:gravity="center_vertical"
             android:text="Pump activates if moisture level falls below"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toTopOf="@+id/tvFanSettings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
@@ -46,17 +46,17 @@
 
         <TextView
             android:id="@+id/tvPumpTime"
-            android:layout_width="186dp"
+            android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:gravity="center"
             android:text="Activate the pump for"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvFanSettings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.09"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvMoistureLabel"
             app:layout_constraintTop_toBottomOf="@+id/tvPumpSettings"
             app:layout_constraintVertical_bias="0.90999997" />
 
@@ -66,7 +66,7 @@
             android:layout_height="47dp"
             android:gravity="center"
             android:text="Minimum Moisture:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvFanSettings"
@@ -161,13 +161,12 @@
 
         <TextView
             android:id="@+id/tvCoolTime"
-            android:layout_width="169dp"
+            android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:gravity="center"
             android:text="Activate the fan for"
-            android:textStyle="bold"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.086"
@@ -201,11 +200,11 @@
 
         <TextView
             android:id="@+id/tvTempLabel"
-            android:layout_width="366dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:gravity="center_vertical"
             android:text="Automatic fan will trigger if above "
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -214,13 +213,13 @@
 
         <TextView
             android:id="@+id/tvMaxTemp"
-            android:layout_width="207dp"
+            android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:gravity="center"
             android:text="Maximum temperature :"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -230,18 +229,18 @@
 
         <TextView
             android:id="@+id/tvMaxTemp2"
-            android:layout_width="78dp"
-            android:layout_height="44dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Celcius"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="@+id/etMaxTemp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/etMaxTemp"
             app:layout_constraintTop_toTopOf="@+id/etMaxTemp"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.58000004" />
 
         <EditText
             android:id="@+id/etMaxTemp"
@@ -284,13 +283,13 @@
 
         <TextView
             android:id="@+id/tvTimelapseLength"
-            android:layout_width="144dp"
+            android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:gravity="center"
             android:text="Take pictures for"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.063"
@@ -337,14 +336,14 @@
 
         <TextView
             android:id="@+id/tvInterval"
-            android:layout_width="131dp"
+            android:layout_width="wrap_content"
             android:layout_height="51dp"
             android:layout_marginBottom="480dp"
             android:gravity="center"
             android:text="Interval (sec):"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -355,26 +354,26 @@
 
         <TextView
             android:id="@+id/tvIntervalLabel"
-            android:layout_width="366dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:gravity="center_vertical"
             android:text="Time between each picture"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toTopOf="@+id/buttonUpdate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTimelapseSettings"
             app:layout_constraintVertical_bias="0.22000003" />
 
         <TextView
             android:id="@+id/tvFPSLabel"
-            android:layout_width="368dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:layout_marginBottom="420dp"
             android:gravity="center_vertical"
             android:text="Pictures per second in the final video"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.441"
@@ -384,13 +383,13 @@
 
         <TextView
             android:id="@+id/tvFPS"
-            android:layout_width="165dp"
+            android:layout_width="wrap_content"
             android:layout_height="53dp"
             android:gravity="center"
             android:text="Frames per second:"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -439,10 +438,10 @@
 
         <TextView
             android:id="@+id/tvNumOfPics"
-            android:layout_width="94dp"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="@+id/tvNumOfPicsLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
@@ -453,13 +452,13 @@
 
         <TextView
             android:id="@+id/tvVidLengthLabel"
-            android:layout_width="260dp"
+            android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:gravity="center_vertical"
-            android:text="Final video length (in seconds):"
-            android:textStyle="bold"
+            android:text="Final video length (in seconds): "
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.112"
@@ -469,14 +468,14 @@
 
         <TextView
             android:id="@+id/tvNumOfPicsLabel"
-            android:layout_width="237dp"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginBottom="252dp"
             android:gravity="center_vertical"
-            android:text="Number of pictures to take:"
-            android:textStyle="bold"
+            android:text="Number of pictures to take: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.097"
@@ -486,10 +485,10 @@
 
         <TextView
             android:id="@+id/tvVidLength"
-            android:layout_width="94dp"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="@+id/tvVidLengthLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.018"

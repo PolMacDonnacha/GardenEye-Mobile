@@ -46,16 +46,16 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
+import kotlin.math.roundToInt
 
 
 class SettingsFragment : Fragment() {
     var off = 0
     var on = 1
     var pumpTimeInput = 0
-    var fanTimeInput:Int = 0
-    var intervalTimeInput: Float? = null
-    var lengthTimeInput: Float? = null
+    var fanTimeInput: Int = 0
+    var intervalTimeInput: Int = 0
+    var lengthTimeInput: Int = 0
     var controls: Controls? = null
     var plot: Plot? = null
     private var database = FirebaseDatabase.getInstance()
@@ -64,12 +64,12 @@ class SettingsFragment : Fragment() {
     var plotRef = database.getReference("/PiDevices/0/plot")
 
     var pumpTimeCat: String? = null
-    var fanTimeCat:kotlin.String? = null
-    var timelapseLengthTimeCat:kotlin.String? = null
-    var timelapseIntervalTimeCat:kotlin.String? = null
+    var fanTimeCat: String? = null
+    var timelapseLengthTimeCat: String? = null
+    var timelapseIntervalTimeCat: String? = null
 
     override fun onResume() {
-        Log.i("RESUMING","Resuming Settings Fragment")
+        Log.i("RESUMING", "Resuming Settings Fragment")
         // Read from the database controls when they change
         controlRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -82,7 +82,7 @@ class SettingsFragment : Fragment() {
                 Log.d("Firebase", "fanTime is: " + controls!!.fanTime)
                 Log.d("Firebase", "fanSwitch is: " + controls!!.fanSwitch)
                 Log.d("Firebase", "pumpSwitch is: " + controls!!.pumpSwitch)
-                if(etTimelapseLength != null) {
+                if (etTimelapseLength != null) {
                     autoControls(controls!!.autoPump, controls!!.autoCool, controls!!.autoTimelapse)
                     etTimelapseLength!!.setText(controls!!.timelapseLength.toString())
                     etCoolTime!!.setText(controls!!.fanTime.toString())
@@ -109,28 +109,35 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onPause() {
-        Log.i("PAUSING","Pausing Settings Fragment")
+        Log.i("PAUSING", "Pausing Settings Fragment")
         super.onPause()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ArrayAdapter.createFromResource(activity as Context,R.array.time_categories, android.R.layout.simple_spinner_item)
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Apply the adapter to the spinner
-        SpinnerInterval?.adapter = adapter
-        val adapter2 = ArrayAdapter.createFromResource(
+        val time_categories = ArrayAdapter.createFromResource(
             activity as Context,
-            R.array.mim_minutes, android.R.layout.simple_spinner_item
+            R.array.time_categories,
+            android.R.layout.simple_spinner_item
         )
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        SpinnerLength?.adapter = adapter2
-        SpinnerFan?.adapter = adapter
-        SpinnerPump?.adapter = adapter
+        // Apply the adapter to the spinner
+        SpinnerInterval?.adapter = time_categories
+        val mim_minutes = ArrayAdapter.createFromResource(
+            activity as Context,
+            R.array.mim_minutes,
+            android.R.layout.simple_spinner_item
+        )
+        val seconds_and_minutes = ArrayAdapter.createFromResource(
+            activity as Context,
+            R.array.seconds_and_minutes,
+            android.R.layout.simple_spinner_item
+        )
+
+        SpinnerLength?.adapter = mim_minutes
+        SpinnerFan?.adapter = seconds_and_minutes
+        SpinnerPump?.adapter = seconds_and_minutes
 
         switchAutoPump?.setOnClickListener {
             if (switchAutoPump!!.isChecked) {
@@ -142,7 +149,7 @@ class SettingsFragment : Fragment() {
             updateDatabase()
         }
         switchAutoFan?.setOnClickListener {
-            Log.i("AUTO_FAN","Auto fan switch clicked")
+            Log.i("AUTO_FAN", "Auto fan switch clicked")
             if (switchAutoFan!!.isChecked) {
                 controls!!.autoCool = 1
                 controls!!.fanSwitch = 0
@@ -163,11 +170,59 @@ class SettingsFragment : Fragment() {
             updateDatabase()
         }
 
-        buttonUpdate?.setOnClickListener{ updateDatabase() }
+        buttonUpdate?.setOnClickListener {
+            //If the page is still open
+            if (etPumpTime != null) {
+                val inputPumpTime = etPumpTime.text.toString().toIntOrNull()
+                val inputFanTime = etCoolTime.text.toString().toIntOrNull()
+                val inputIntervalTime = etTimelapseInterval.text.toString().toIntOrNull()
+                val inputLengthTime = etTimelapseLength.text.toString().toIntOrNull()
+                val inputFPS = etFPS.text.toString().toIntOrNull()
+                val inputMaxTemp = etMaxTemp.text.toString().toIntOrNull()
+                pumpTimeCat = SpinnerPump?.selectedItem.toString()
+                fanTimeCat = SpinnerFan?.selectedItem.toString()
+                timelapseIntervalTimeCat = SpinnerInterval?.selectedItem.toString()
+                timelapseLengthTimeCat = SpinnerLength?.selectedItem.toString()
+                //Is the pump input valid?
+                if (inputPumpTime != null && inputPumpTime > 0 && inputPumpTime < 150) {
+                    controls!!.pumpTime = secondsConversion(inputPumpTime, pumpTimeCat!!)
 
+                    //Is the fan input valid?
+                    if (inputFanTime != null && inputFanTime > 0 && inputFanTime < 150) {
+                        controls!!.fanTime = secondsConversion(inputFanTime, fanTimeCat!!)
+
+                        //Is the timelapse interval input valid?
+                        if (inputIntervalTime != null && inputIntervalTime > 0 && inputIntervalTime < 150) {
+                            controls!!.timelapseInterval = secondsConversion(inputIntervalTime, timelapseIntervalTimeCat!!)
+
+                            //Is the timelapse length input valid?
+                            if (inputLengthTime != null && inputLengthTime > 0 && inputLengthTime < 150) {
+                                controls!!.timelapseLength = minutesConversion(inputLengthTime, timelapseIntervalTimeCat!!)
+
+                                //Is the timelapse fps input valid?
+                                if (inputFPS != null && inputFPS > 0 && inputFPS <= 60) {
+                                    controls!!.timelapseFps = inputFPS
+
+                                    //Is the max temperature input valid?
+                                    if (inputMaxTemp != null && inputMaxTemp > 5 && inputMaxTemp <= 50) {
+                                        controls!!.maxTemp = inputMaxTemp
+
+                                        //Update when all inputs are valid
+                                        updateDatabase()
+                                        Toast.makeText(activity, "Updating data", Toast.LENGTH_SHORT).show()
+
+                                    } else { Toast.makeText(activity, "Invalid max temperature input", Toast.LENGTH_SHORT).show() }
+                                } else { Toast.makeText(activity, "Invalid frames per second input", Toast.LENGTH_SHORT).show() }
+                            } else { Toast.makeText(activity, "Invalid timelapse length input", Toast.LENGTH_SHORT).show() }
+                        } else { Toast.makeText(activity, "Invalid timelapse interval input",Toast.LENGTH_SHORT).show() }
+                    } else { Toast.makeText(activity, "Invalid fan input", Toast.LENGTH_SHORT).show() }
+                } else { Toast.makeText(activity, "Invalid pump input", Toast.LENGTH_SHORT).show() }
+            }
+        }
 
 
     }
+
     fun autoControls(pump: Int, fan: Int, timelapse: Int) {
         switchAutoPump?.isChecked = pump == 1
         switchAutoFan?.isChecked = fan == 1
@@ -175,45 +230,34 @@ class SettingsFragment : Fragment() {
     }
 
 
-
     private fun updateDatabase() {
-        pumpTimeInput = etPumpTime!!.text.toString().toInt()
-        fanTimeInput = etCoolTime!!.text.toString().toInt()
-        intervalTimeInput = etTimelapseInterval!!.text.toString().toFloat()
-        lengthTimeInput = etTimelapseLength!!.text.toString().toFloat()
-        pumpTimeCat = SpinnerPump?.selectedItem.toString()
-        fanTimeCat = SpinnerFan?.selectedItem.toString()
-        timelapseIntervalTimeCat = SpinnerInterval?.selectedItem.toString()
-        timelapseLengthTimeCat = SpinnerLength?.selectedItem.toString()
-        when (fanTimeCat) {
-            "seconds" -> {}
-            "minutes" -> fanTimeInput *= 60
-            "hours" -> fanTimeInput *= 60 * 60
-            "days" -> fanTimeInput *= 60 * 60 * 60
-        }
-        when (timelapseIntervalTimeCat) {
-            "seconds" -> {}
-            "minutes" -> intervalTimeInput!!.times(60f)
-            "hours" -> intervalTimeInput!!.times(60 * 60f)
-            "days" -> intervalTimeInput!!.times(60 * 60 * 60f)
-        }
-        when (timelapseLengthTimeCat) {
-            "seconds" -> lengthTimeInput!!.div(60f)
-            "minutes" -> {}
-            "hours" -> lengthTimeInput!!.times(60 * 60)
-            "days" -> lengthTimeInput!!.times(60 * 60 * 60)
-        }
-        controls!!.fanTime = fanTimeInput
-        controls!!.timelapseInterval = intervalTimeInput!!
-        controls!!.timelapseLength = lengthTimeInput!!
-        controls!!.timelapseFps = etFPS!!.text.toString().toInt()
-        controls!!.maxTemp = etMaxTemp!!.text.toString().toInt()
-        controlRef.updateChildren(controls!!.toMap()).addOnSuccessListener{
-            Log.v("Data Update","Data Sucessfully Updated")
-        }.addOnFailureListener { Log.e("Data Update","Failed to update data") }
+        controlRef.updateChildren(controls!!.toMap()).addOnSuccessListener {
+            Log.v("Data Update", "Data Sucessfully Updated")
+        }.addOnFailureListener { Log.e("Data Update", "Failed to update data") }
     }
 
+    fun secondsConversion(inputSeconds: Int, timeCategory: String): Int {
+        when (timeCategory) {
+            "seconds" -> {}
+            "minutes" -> inputSeconds.times(60f)
+            "hours" -> inputSeconds.times(60 * 60f)
+            "days" -> inputSeconds.times(60 * 60 * 60f)
+        }
+        return inputSeconds
+    }
 
+    fun minutesConversion(inputMinutes: Int, timeCategory: String): Int {
+        var newTime = 0f
+        when (timeCategory) {
+            "seconds" -> newTime = inputMinutes.div(60f)
+            "minutes" -> {
+                newTime = inputMinutes.toFloat()
+            }
+            "hours" -> newTime = inputMinutes.times(60 * 60f)
+            "days" -> newTime = inputMinutes.times(60 * 60 * 60f)
+        }
+        return newTime.roundToInt()
+    }
 
 
     class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
@@ -232,15 +276,12 @@ class SettingsFragment : Fragment() {
         }
     }
 
-
-
-
-        override fun onCreateView(
+    override fun onCreateView(
         inflator: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            Log.v("Fragment Create","Returning the layout")
+        Log.v("Fragment Create", "Returning the layout")
         return inflator.inflate(R.layout.fragment_settings, container, false)
     }
 }

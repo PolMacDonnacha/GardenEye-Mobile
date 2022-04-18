@@ -25,7 +25,11 @@
         <item>minutes</item>
         <item>hours</item>
         <item>days</item>
+    </string-array>
 
+    <string-array name="seconds_and_minutes">
+        <item>seconds</item>
+        <item>minutes</item>
     </string-array>
 
 </resources>

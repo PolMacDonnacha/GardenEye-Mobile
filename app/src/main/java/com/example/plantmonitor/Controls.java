@@ -17,8 +17,8 @@ public class Controls {
     int pumpTime;
     int refreshInterval;
     int timelapseFps;
-    float timelapseInterval;
-    float timelapseLength;
+    int timelapseInterval;//was float
+    int timelapseLength;//was float
     int timelapseSwitch;
 
     public Controls() {
@@ -112,19 +112,19 @@ public class Controls {
         this.timelapseFps = timelapseFps;
     }
 
-    public float getTimelapseInterval() {
+    public int getTimelapseInterval() {
         return timelapseInterval;
     }
 
-    public void setTimelapseInterval(float timelapseInterval) {
+    public void setTimelapseInterval(int timelapseInterval) {
         this.timelapseInterval = timelapseInterval;
     }
 
-    public float getTimelapseLength() {
+    public int getTimelapseLength() {
         return timelapseLength;
     }
 
-    public void setTimelapseLength(float timelapseLength) {
+    public void setTimelapseLength(int timelapseLength) {
         this.timelapseLength = timelapseLength;
     }
 
